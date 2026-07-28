@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: EsTehKasir_V2
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,27 +23,16 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK
-        run: |
-          yes | sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
-      - name: Set up Gradle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.10"
 
       - name: Build APK
-        run: |
-          gradle assembleDebug \
-            -Dorg.gradle.jvmargs="-Xmx2g" \
-            -Dkotlin.jvm.target.validation.mode=warning
-        working-directory: EsTehKasir_V2
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: EsTehKasir-v2.0-debug-apk
-          path: EsTehKasir_V2/app/build/outputs/apk/debug/app-debug.apk
+          name: EsTehKasir-v2.0
+          path: EsTehKasir_V2/app/build/outputs/apk/debug/*.apk
