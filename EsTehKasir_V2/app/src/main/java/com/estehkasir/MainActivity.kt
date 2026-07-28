@@ -160,14 +160,30 @@ class MainActivity : Activity() {
     }
 
     private fun showReport() {
-        val root=base()
-        root.addView(title("📊 Laporan"))
-        root.addView(TextView(this).apply{
-            text="Total omzet tersimpan: ${rupiah.format(prefs.getInt("sales",0))}\nTransaksi: ${prefs.getInt("transactions",0)}\n\nStok produk:"
-            textSize=18f
-        })
-        products.forEach{p->root.addView(TextView(this).apply{text="• ${p.name}: ${p.stock}";textSize=16f;setPadding=0,10,0,10})}
-        root.addView(btn("← Kembali"){showDashboard()})
-        setContentView(root)
+    val root = base()
+
+    root.addView(title("📊 Laporan"))
+
+    val summary = TextView(this)
+    summary.text =
+        "Total omzet tersimpan: ${rupiah.format(prefs.getInt("sales", 0))}\n" +
+        "Transaksi: ${prefs.getInt("transactions", 0)}\n\n" +
+        "Stok produk:"
+    summary.textSize = 18f
+    root.addView(summary)
+
+    products.forEach { p ->
+        val item = TextView(this)
+        item.text = "• ${p.name}: ${p.stock}"
+        item.textSize = 16f
+        item.setPadding(0, 10, 0, 10)
+        root.addView(item)
     }
+
+    root.addView(btn("← Kembali") {
+        showDashboard()
+    })
+
+    setContentView(root)
+  }
 }
