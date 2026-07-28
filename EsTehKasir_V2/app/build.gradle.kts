@@ -2,9 +2,11 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
 android {
     namespace = "com.estehkasir"
     compileSdk = 35
+
     defaultConfig {
         applicationId = "com.estehkasir"
         minSdk = 24
@@ -12,8 +14,8 @@ android {
         versionCode = 2
         versionName = "2.0"
     }
-}
-compileOptions {
+
+    compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -21,3 +23,4 @@ compileOptions {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
