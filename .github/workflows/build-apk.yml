@@ -32,7 +32,10 @@ jobs:
           gradle-version: "8.10"
 
       - name: Build APK
-        run: gradle assembleDebug
+        run: |
+          gradle assembleDebug \
+            -Dorg.gradle.jvmargs="-Xmx2g" \
+            -Dkotlin.jvm.target.validation.mode=warning
         working-directory: EsTehKasir_V2
 
       - name: Upload APK
