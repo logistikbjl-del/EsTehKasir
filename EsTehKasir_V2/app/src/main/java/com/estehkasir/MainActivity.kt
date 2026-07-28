@@ -166,7 +166,7 @@ class MainActivity : Activity() {
             text="Total omzet tersimpan: ${rupiah.format(prefs.getInt("sales",0))}\nTransaksi: ${prefs.getInt("transactions",0)}\n\nStok produk:"
             textSize=18f
         })
-        products.forEach{p->root.addView(TextView(this).apply{text="• ${p.name}: ${p.stock}";textSize=16f;padding=10})}
+        products.forEach{p->root.addView(TextView(this).apply{text="• ${p.name}: ${p.stock}";textSize=16f;setPadding=0,10,0,10})}
         root.addView(btn("← Kembali"){showDashboard()})
         setContentView(root)
     }
